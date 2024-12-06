@@ -4,7 +4,7 @@
   --primary-dark: #3c8ae6;
   --bg-color: #f7f7f7;
   --text-color: #333;
-  --heading-font: 'Inter', sans-serif; /* Consider linking to this font from Google Fonts */
+  --heading-font: 'Inter', sans-serif;
   --body-font: 'Inter', sans-serif;
   --border-radius: 8px;
   --transition-speed: 0.3s;
@@ -41,7 +41,6 @@ nav ul {
   margin: 0 auto;
   padding: 0;
   max-width: var(--max-width);
-  justify-content: flex-start;
   gap: 30px;
   align-items: center;
 }
@@ -67,6 +66,66 @@ nav ul li.active a {
   border-bottom: 2px solid var(--primary-color);
 }
 
+/* Shared Containers & Headings */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.section-container {
+  padding: 60px 20px;
+}
+
+.section-heading {
+  font-family: var(--heading-font);
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.section-subheading {
+  font-family: var(--heading-font);
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+/* Buttons */
+.primary-btn {
+  background-color: var(--primary-dark);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  transition: background-color var(--transition-speed), transform var(--transition-speed);
+  font-size: 1rem;
+}
+
+.primary-btn:hover, .primary-btn:focus {
+  background-color: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+.secondary-btn {
+  background-color: #eee;
+  color: var(--text-color);
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: var(--border-radius);
+  margin-left: 10px;
+  transition: background-color var(--transition-speed), transform var(--transition-speed);
+  font-size: 1rem;
+}
+
+.secondary-btn:hover, .secondary-btn:focus {
+  background-color: #ddd;
+  transform: translateY(-2px);
+}
+
 /* Hero Section */
 .hero-section {
   background: linear-gradient(to bottom, var(--primary-color), #00f2fe);
@@ -89,26 +148,27 @@ nav ul li.active a {
 }
 
 .hero-section button {
-  background-color: var(--primary-dark);
+  background: linear-gradient(to right, var(--primary-dark), var(--primary-color));
   color: #fff;
   border: none;
   padding: 14px 28px;
-  font-size: 1rem;
+  font-size: 1.1rem;
   cursor: pointer;
   border-radius: var(--border-radius);
-  transition: background-color var(--transition-speed), transform var(--transition-speed);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: background-image var(--transition-speed), transform var(--transition-speed), box-shadow var(--transition-speed);
 }
 
-.hero-section button:hover, .hero-section button:focus {
-  background-color: var(--primary-color);
+.hero-section button:hover,
+.hero-section button:focus {
+  background: linear-gradient(to right, var(--primary-color), #00f2fe);
   transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.15);
 }
 
 /* Features Section */
 .features-section {
   padding: 60px 20px;
-  max-width: var(--max-width);
-  margin: 0 auto;
   text-align: center;
 }
 
@@ -154,8 +214,107 @@ nav ul li.active a {
   color: #555;
 }
 
+/* Maps Section */
+.map-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.map-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.map-controls input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+}
+
+.map-area {
+  height: 500px;
+  width: 100%;
+  background: #eee;
+  border-radius: var(--border-radius);
+}
+
+.apartments-list-section {
+  margin-top: 40px;
+}
+
+.apartments-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.apartments-list li {
+  background: #fff;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Ratings Section */
+.table-container {
+  overflow-x: auto;
+}
+
+#ratingsTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+
+#ratingsTable thead {
+  background: #f0f0f0;
+}
+
+#ratingsTable th, #ratingsTable td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Authentication Section */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 0 auto;
+  gap: 20px;
+}
+
+.auth-form label {
+  font-weight: 500;
+}
+
+.auth-form input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+}
+
+.auth-buttons {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
 /* Responsive Adjustments */
 @media (max-width: 600px) {
+  nav ul {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
   .hero-section h1 {
     font-size: 2rem;
   }
@@ -165,13 +324,11 @@ nav ul li.active a {
     margin-bottom: 30px;
   }
 
-  nav ul {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 15px;
-  }
-
   .features-section h2 {
     font-size: 2rem;
+  }
+
+  .map-section {
+    flex-direction: column;
   }
 }
