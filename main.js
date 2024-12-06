@@ -6,11 +6,13 @@ function showTab(tabId) {
   const activeTab = document.getElementById(tabId);
   if (activeTab) {
     activeTab.style.display = 'block';
+
+    // Update nav active class
+    const navItems = document.querySelectorAll('nav ul li');
+    navItems.forEach(item => item.classList.remove('active'));
+    const linkItem = document.querySelector(`nav ul li a[href="#${tabId}"]`)?.parentElement;
+    if (linkItem) linkItem.classList.add('active');
   }
 }
 
-window.showTab = showTab;
-
-window.onload = () => {
-  showTab('home');
-};
+// Additional main logic as needed
