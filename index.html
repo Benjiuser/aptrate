@@ -1,22 +1,15 @@
-Mistral AI logo
-Loading
-Mistral-large-2407
-Responding...
-Sure! Let's rebuild the entire website step by step.
-
-1. index.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Apartment Finder - Austin</title>
+  <title>Apartment Finder</title>
   <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
   <nav>
     <ul>
-      <li><a href="#home" onclick="showTab('home')">Home</a></li>
+      <li class="active"><a href="#home" onclick="showTab('home')">Home</a></li>
       <li><a href="#maps" onclick="showTab('maps')">Maps</a></li>
       <li><a href="#ratings" onclick="showTab('ratings')">My Ratings</a></li>
       <li><a href="#auth" onclick="showTab('auth')">Sign In</a></li>
@@ -25,57 +18,95 @@ Sure! Let's rebuild the entire website step by step.
 
   <!-- Home Page -->
   <div id="home" class="tab-content">
-    <div class="hero-section">
-      <h1>Welcome to Apartment Finder</h1>
-      <p>Find and rate apartments in Austin, TX.</p>
-      <button onclick="showTab('maps')">Explore Now</button>
-    </div>
+    <section class="hero-section">
+      <div class="container">
+        <h1>Welcome to Apartment Finder</h1>
+        <p>Your ultimate tool to find and rate the best apartments in your area.</p>
+        <button onclick="showTab('maps')">Explore Now</button>
+      </div>
+    </section>
+
+    <section class="features-section">
+      <div class="container">
+        <h2>Why Choose Us</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <h3>Extensive Listings</h3>
+            <p>Find apartments that fit your budget and lifestyle with our large database.</p>
+          </div>
+          <div class="feature-card">
+            <h3>Reliable Reviews</h3>
+            <p>Honest, user-generated ratings to help you make informed decisions.</p>
+          </div>
+          <div class="feature-card">
+            <h3>Location Insights</h3>
+            <p>Discover popular neighborhoods with proximity to schools, work, and amenities.</p>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 
   <!-- Maps Page -->
   <div id="maps" class="tab-content" style="display:none;">
-    <h1>Apartment Maps - Austin, TX</h1>
-    <input type="text" id="searchBox" placeholder="Search for a location">
-    <button onclick="searchLocation()">Search</button>
-    <div id="map" style="height: 500px; width: 100%; margin-top:10px;"></div>
-    <div id="apartmentsContainer">
-      <h2>Nearby Apartments</h2>
-      <ul id="apartmentsList"></ul>
+    <div class="container section-container">
+      <h2 class="section-heading">Apartment Maps</h2>
+      <div class="map-section">
+        <div class="map-controls">
+          <input id="searchInput" type="text" placeholder="Search city or address..."/>
+          <button class="primary-btn" onclick="searchCity()">Search</button>
+        </div>
+        <div id="map" class="map-area"></div>
+      </div>
+
+      <div id="apartmentsContainer" class="apartments-list-section">
+        <h3 class="section-subheading">Nearby Apartments</h3>
+        <ul id="apartmentsList" class="apartments-list"></ul>
+      </div>
     </div>
   </div>
 
   <!-- User Ratings Page -->
   <div id="ratings" class="tab-content" style="display:none;">
-    <h1>My Ratings</h1>
-    <table id="ratingsTable" border="1">
-      <thead>
-        <tr>
-          <th>Apartment Name</th>
-          <th>Luxury</th>
-          <th>Amenities</th>
-          <th>Distance (miles)</th>
-          <th>Final Rating</th>
-          <th>Rate</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Dynamically populated by JS -->
-      </tbody>
-    </table>
+    <div class="container section-container">
+      <h2 class="section-heading">My Ratings</h2>
+      <div class="table-container">
+        <table id="ratingsTable">
+          <thead>
+            <tr>
+              <th>Apartment Name</th>
+              <th>Luxury</th>
+              <th>Amenities</th>
+              <th>Distance (miles)</th>
+              <th>Final Rating</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Dynamically populated by JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 
   <!-- User Authentication Page -->
   <div id="auth" class="tab-content" style="display:none;">
-    <h2>User Authentication</h2>
-    <form id="auth-form">
-      <label for="email">Email:</label>
-      <input type="email" id="email" required>
-      <label for="password">Password:</label>
-      <input type="password" id="password" required>
-      <button type="button" onclick="registerUser()">Sign Up</button>
-      <button type="button" onclick="loginUser()">Log In</button>
-      <button type="button" onclick="logoutUser()">Log Out</button>
-    </form>
+    <div class="container section-container">
+      <h2 class="section-heading">User Authentication</h2>
+      <form id="auth-form" class="auth-form">
+        <label for="email">Email:</label>
+        <input type="email" id="email" required>
+        
+        <label for="password">Password:</label>
+        <input type="password" id="password" required>
+        
+        <div class="auth-buttons">
+          <button type="button" class="primary-btn" onclick="registerUser()">Sign Up</button>
+          <button type="button" class="secondary-btn" onclick="loginUser()">Log In</button>
+          <button type="button" class="secondary-btn" onclick="logoutUser()">Log Out</button>
+        </div>
+      </form>
+    </div>
   </div>
 
   <!-- Firebase SDKs -->
@@ -87,7 +118,7 @@ Sure! Let's rebuild the entire website step by step.
   <script
     async
     defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzp-k4z_v4_zAUbOj_52RyudNdsp__0lc&libraries=places&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&libraries=places&callback=initMap">
   </script>
 
   <!-- App Scripts -->
