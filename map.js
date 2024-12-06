@@ -35,28 +35,52 @@ function displayApartments(apartments) {
   clearMarkers();
 
   const apartmentsList = document.getElementById('apartmentsList');
-  apartments.forEach((apartment) => {
-    const marker = new google.maps.Marker({
-      position: apartment.geometry.location,
-      map: map,
-      title: apartment.name
-    });
-    markers.push(marker);
+  const infoWindow = new google.maps.InfoWindow();
 
+  apartments.forEach((apartment) => {
     const distanceMiles = distanceBetweenLocations(
       austinLocation.lat, austinLocation.lng,
       apartment.geometry.location.lat(), apartment.geometry.location.lng()
     );
 
+    // Add apartment marker (automatically sets up click event for infoWindow)
+    const marker = addApartmentMarker(apartment, distanceMiles, infoWindow);
+
+    // Add the listing to the sidebar
     const li = document.createElement('li');
     li.textContent = `${apartment.name} - ${distanceMiles.toFixed(2)} miles away`;
     apartmentsList.appendChild(li);
   });
 
-  // If user is logged in and db is available, you can save apartments
+  // If user is logged in and db is available, save apartments
   if (window.currentUser && window.db) {
     saveApartmentsToUser(apartments);
   }
+}
+
+// Helper function to create a marker and attach a click event for infoWindow
+function addApartmentMarker(apartment, distanceMiles, infoWindow) {
+  const marker = new google.maps.Marker({
+    position: apartment.geometry.location,
+    map: map,
+    title: apartment.name
+  });
+  markers.push(marker);
+
+  // On marker click, show an info window with apartment details
+  marker.addListener('click', () => {
+    const contentString = `
+      <div style="color:#000;">
+        <h2>${apartment.name}</h2>
+        <p>${distanceMiles.toFixed(2)} miles away</p>
+        <p><strong>Address:</strong> ${apartment.vicinity || 'N/A'}</p>
+      </div>
+    `;
+    infoWindow.setContent(contentString);
+    infoWindow.open(map, marker);
+  });
+
+  return marker;
 }
 
 function clearApartmentsList() {
