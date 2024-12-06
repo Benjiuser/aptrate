@@ -5,12 +5,12 @@ import { getFirestore } from "https://www.gstatic.com/firebasejs/9.17.1/firebase
 
 // Replace these with your actual Firebase configuration values from your Firebase project settings.
 const firebaseConfig = {
-  apiKey: "AIzaSyCb28g5WhTEaOigffWmm19-nJ6UoWgrVNs",
-  authDomain: "aptrate-6ffd2.firebaseapp.com",
-  projectId: "aptrate-6ffd2",
-  storageBucket: "aptrate-6ffd2.firebasestorage.app",
-  messagingSenderId: "699740497613",
-  appId: "1:699740497613:web:29a0392bb5ad50c2c8ab84"
+  apiKey: "YOUR_FIREBASE_API_KEY",
+  authDomain: "your-project-id.firebaseapp.com",
+  projectId: "your-project-id",
+  storageBucket: "your-project-id.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
 };
 
 // Initialize Firebase app
